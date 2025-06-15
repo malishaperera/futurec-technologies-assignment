@@ -1,12 +1,15 @@
 import {PrismaClient} from "@prisma/client";
 import {Product} from "../models/Product";
+import {generateProductId} from "./util/generateID.controller";
 
 const prisma = new PrismaClient();
 
 export async function createProduct(product: Product) {
     try {
+        const newProductId = await generateProductId();
         const addedProduct = await prisma.product.create({
             data: {
+                productId: newProductId,
                 name: product.name,
                 price: product.price,
                 quantity: product.quantity
@@ -20,11 +23,11 @@ export async function createProduct(product: Product) {
     }
 }
 
-export async function updateProduct(productId: number, product: Product) {
+export async function updateProduct(productId: string, product: Product) {
     try {
         const updatedProduct = await prisma.product.update({
             where: {
-                id: productId,
+                productId: productId,
             },
             data: {
                 name: product.name,
@@ -40,11 +43,11 @@ export async function updateProduct(productId: number, product: Product) {
     }
 }
 
-export async function deleteProduct(productId: number) {
+export async function deleteProduct(productId: string) {
     try {
         const deletedProduct = await prisma.product.delete({
             where: {
-                id: productId,
+                productId: productId,
             },
         });
         return deletedProduct;
@@ -64,10 +67,10 @@ export async function getAllProducts() {
     }
 }
 
-export async function isProductCredentials(productId: number) {
+export async function isProductCredentials(productId: string) {
     try {
         const product = await prisma.product.findUnique({
-            where: { id: productId }
+            where: { productId: productId }
         });
         return product;
     } catch (err) {

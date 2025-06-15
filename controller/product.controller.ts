@@ -4,13 +4,12 @@ import {Product} from "../models/Product";
 import {
     createProduct,
     deleteProduct, getAllProducts,
-    // getAllProduct,
     isProductCredentials,
     updateProduct
 } from "../database/product-client";
 
-dotenv.config();
 
+dotenv.config();
 
 export const productCreate = async(req:Request,res:Response):Promise<any> => {
     const {name,price,quantity} = req.body;
@@ -34,9 +33,8 @@ export const productCreate = async(req:Request,res:Response):Promise<any> => {
     }
 }
 
-
 export const productUpdate = async(req:Request,res:Response):Promise<any> => {
-    const productId = parseInt(req.params.id);
+    const productId = req.params.id;
     const {name, price, quantity} = req.body;
 
     try {
@@ -56,7 +54,7 @@ export const productUpdate = async(req:Request,res:Response):Promise<any> => {
 }
 
 export const productDelete = async(req:Request,res:Response):Promise<any> => {
-    const productId = parseInt(req.params.id);
+    const productId = req.params.id;
 
     try {
         const isProduct = await isProductCredentials(productId);
@@ -81,7 +79,7 @@ export const productsGetAll = async(req:Request,res:Response):Promise<any> => {
 }
 
 export const productGet = async(req:Request,res:Response):Promise<any> => {
-    const productId = parseInt(req.params.id);
+    const productId = req.params.id;
 
     try {
         const product = await isProductCredentials(productId);

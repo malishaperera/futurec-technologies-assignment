@@ -9,7 +9,6 @@ const app = express();
 
 app.use(express.json());
 
-
 app.use("/api/user",UserRouter);
 app.use("/api/product",ProductRouter)
 

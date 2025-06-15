@@ -6,6 +6,7 @@ import bcrypt from 'bcrypt';
 
 dotenv.config();
 
+//user registration
 export const registerUser = async (req: Request, res: Response): Promise<any> => {
     const {name, email, password} = req.body;
 
@@ -33,8 +34,7 @@ export const registerUser = async (req: Request, res: Response): Promise<any> =>
     }
 }
 
-
-
+//user login
 export const userLogin = async (req:Request, res:Response): Promise<any> => {
 
     const {email, password} = req.body;

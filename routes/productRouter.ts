@@ -1,5 +1,4 @@
 import express from "express";
-import * as UserController from "../controller/user.controller";
 import * as ProductController from "../controller/product.controller";
 
 
